@@ -1,23 +1,11 @@
-const carouselContainer = document.querySelector('.carousel-container');
-const carouselImages = document.querySelector('.carousel-images');
-const carouselIndicators = document.querySelectorAll('.carousel-indicator');
+const imageWrapper = document.querySelector('.image-wrapper');
+const indicators = document.querySelectorAll('.indicator');
 
-let currentIndex = 0;
+let activeIndex = 0;
 
-carouselIndicators[currentIndex].classList.add('active');
-
-carouselIndicators.forEach((indicator, index) => {
-  indicator.addEventListener('click', () => {
-    currentIndex = index;
-    updateCarousel();
-  });
-});
-
-function updateCarousel() {
-  carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-  carouselIndicators.forEach((indicator, index) => {
-    if (index === currentIndex) {
+function setActiveIndicator() {
+  indicators.forEach((indicator, index) => {
+    if (index === activeIndex) {
       indicator.classList.add('active');
     } else {
       indicator.classList.remove('active');
@@ -25,7 +13,16 @@ function updateCarousel() {
   });
 }
 
-setInterval(() => {
-  currentIndex = (currentIndex + 1) % carouselIndicators.length;
-  updateCarousel();
-}, 3000);
+function showImage(index) {
+  imageWrapper.style.transform = `translateX(-${index * 600}px)`;
+  activeIndex = index;
+  setActiveIndicator();
+}
+
+indicators.forEach((indicator, index) => {
+  indicator.addEventListener('click', () => {
+    showImage(index);
+  });
+});
+
+showImage(activeIndex);
