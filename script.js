@@ -18,9 +18,23 @@ function setActiveIndicator() {
 }
 
 function showImage(index) {
-  imageWrapper.style.transform = `translateX(-${index * 600}px)`;
-  activeIndex = index;
-  setActiveIndicator();
+  const distance = (index - activeIndex) * -600;
+  const duration = 600;
+  const startTime = performance.now();
+  const animate = (currentTime) => {
+    const elapsedTime = currentTime - startTime;
+    const progress = Math.min(elapsedTime / duration, 1);
+    const ease = easeOutQuart(progress);
+    const translateX = activeIndex * 600 + distance * ease;
+    imageWrapper.style.transform = `translateX(${translateX}px)`;
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      activeIndex = index;
+      setActiveIndicator();
+    }
+  };
+  requestAnimationFrame(animate);
 }
 
 function startSlideTimer() {
@@ -75,3 +89,6 @@ indicators.forEach((indicator, index) => {
 
 startSlideTimer();
 
+function easeOutQuart(x) {
+  return 1 - Math.pow(1 - x, 4);
+}
