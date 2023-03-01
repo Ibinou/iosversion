@@ -1,5 +1,7 @@
 const imageWrapper = document.querySelector('.image-wrapper');
 const indicators = document.querySelectorAll('.indicator');
+const slideInterval = 5000; // Set the slide interval time in milliseconds
+let slideTimer;
 
 let activeIndex = 0;
 
@@ -19,10 +21,26 @@ function showImage(index) {
   setActiveIndicator();
 }
 
+function startSlideTimer() {
+  slideTimer = setInterval(() => {
+    let nextIndex = activeIndex + 1;
+    if (nextIndex >= indicators.length) {
+      nextIndex = 0;
+    }
+    showImage(nextIndex);
+  }, slideInterval);
+}
+
+function stopSlideTimer() {
+  clearInterval(slideTimer);
+}
+
 indicators.forEach((indicator, index) => {
   indicator.addEventListener('click', () => {
+    stopSlideTimer();
     showImage(index);
+    startSlideTimer();
   });
 });
 
-showImage(activeIndex);
+startSlideTimer();
