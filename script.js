@@ -29,4 +29,3 @@ setInterval(() => {
   currentIndex = (currentIndex + 1) % carouselIndicators.length;
   updateCarousel();
 }, 3000);
-
