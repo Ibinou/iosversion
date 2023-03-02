@@ -1,41 +1,30 @@
-.carousel-container {
-  position: relative;
-  width: 600px;
-  height: 400px;
-  overflow: hidden;
+#iphone-container {
+  width: 375px; /* Largeur de l'iPhone  */
+  height: 667px; /* Hauteur de l'iPhone */
+  border: 1px solid black; /* Bordure du rectangle */
+  margin: 0 auto; /* Centrer le rectangle horizontalement */
+  position: relative; /* Définir le contexte de positionnement pour l'iPhone */
 }
 
-.image-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1800px; /* width of all three images combined */
-  height: 400px;
+#iphone-container:before {
+  content: ""; /* Créer un élément vide pour l'image de l'iPhone */
+  display: block; /* Afficher l'image en tant que bloc */
+  width: 320px; /* Largeur de l'image de l'iPhone */
+  height: 568px; /* Hauteur de l'image de l'iPhone */
+  position: absolute; /* Positionner l'image par rapport au conteneur */
+  top: 50%; /* Définir la position verticale */
+  left: 50%; /* Définir la position horizontale */
+  transform: translate(-50%, -50%); /* Centrer l'image dans le conteneur */
+  background-image: url("chemin/vers/votre/image/iphone.png"); /* Ajouter l'image de l'iPhone */
+  background-size: cover; /* Adapter la taille de l'image à la taille du conteneur */
 }
 
-.image-wrapper img {
-  display: block;
-  float: left;
-  width: 600px;
-  height: 400px;
-}
-
-.indicator-wrapper {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.indicator {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #ccc;
-  margin-right: 10px;
-}
-
-.indicator.active {
-  background-color: #333;
+#iphone-container:after {
+  content: ""; /* Ajouter un élément pour afficher la version d'iOS */
+  display: block; /* Afficher l'élément en tant que bloc */
+  font-size: 20px; /* Définir la taille de police */
+  position: absolute; /* Positionner l'élément par rapport au conteneur */
+  bottom: 20px; /* Définir la position verticale */
+  left: 50%; /* Définir la position horizontale */
+  transform: translateX(-50%); /* Centrer l'élément horizontalement */
 }
