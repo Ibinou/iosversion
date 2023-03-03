@@ -1,44 +1,52 @@
-.carousel {
-  position: relative;
-  width: 100%;
+const carouselImages = document.querySelector(".carousel-images");
+const dotsContainer = document.querySelector(".carousel-dots");
+
+let scrollAmount = 0;
+const scrollStep = carouselImages.offsetWidth;
+
+carouselImages.addEventListener("scroll", () => {
+  const activeDot = document.querySelector(".carousel-dot.active");
+  if (activeDot) {
+    activeDot.classList.remove("active");
+  }
+  const dotIndex = Math.round(carouselImages.scrollLeft / scrollStep);
+  const dot = document.querySelector(`.carousel-dot[data-index="${dotIndex}"]`);
+  if (dot) {
+    dot.classList.add("active");
+  }
+});
+
+for (let i = 0; i < carouselImages.children.length; i++) {
+  const dot = document.createElement("div");
+  dot.classList.add("carousel-dot");
+  dot.setAttribute("data-index", i);
+  dot.addEventListener("click", () => {
+    carouselImages.scrollTo({
+      left: i * scrollStep,
+      behavior: "smooth"
+    });
+  });
+  dotsContainer.appendChild(dot);
 }
 
-.carousel-images {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-}
+let touchStartX = 0;
+let touchEndX = 0;
 
-.carousel-images img {
-  flex: 0 0 auto;
-  width: 100%;
-  height: auto;
-  scroll-snap-align: center;
-}
+carouselImages.addEventListener("touchstart", e => {
+  touchStartX = e.touches[0].clientX;
+});
 
-.carousel-navigation {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-}
-
-.carousel-dots {
-  display: flex;
-}
-
-.carousel-dot {
-  width: 10px;
-  height: 10px;
-  margin: 0 5px;
-  border-radius: 50%;
-  background-color: #ccc;
-  cursor: pointer;
-}
-
-.carousel-dot.active {
-  background-color: #fff;
-}
+carouselImages.addEventListener("touchend", e => {
+  touchEndX = e.changedTouches[0].clientX;
+  if (touchEndX < touchStartX) {
+    carouselImages.scrollBy({
+      left: scrollStep,
+      behavior: "smooth"
+    });
+  } else if (touchEndX > touchStartX) {
+    carouselImages.scrollBy({
+      left: -scrollStep,
+      behavior: "smooth"
+    });
+  }
+});
