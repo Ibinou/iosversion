@@ -7,13 +7,7 @@ const versionMatch = navigator.userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
 const iosVersion = versionMatch ? `${versionMatch[1]}.${versionMatch[2]}.${versionMatch[3] || 0}` : "N/A";
 document.getElementById("ios-version").textContent = `iOS version: ${iosVersion}`;
 
-// Récupère une image du produit Apple à partir de Wikipédia
-fetch("https://en.wikipedia.org/api/rest_v1/page/media-list/Apple_Inc.")
-  .then(response => response.json())
-  .then(data => {
-    const images = data.items.filter(item => item.title.includes(productName));
-    if (images.length > 0) {
-      const imageUrl = images[0].thumbnail.source;
-      document.getElementById("product-image").src = imageUrl;
-    }
-  });
+// Récupère l'image du produit
+const productImage = document.getElementById("product-image");
+productImage.src = "https://upload.wikimedia.org/wikipedia/commons/3/36/IPhone_14_Pro_vector_%28blue%29.svg";
+productImage.alt = "Image de mon produit";
