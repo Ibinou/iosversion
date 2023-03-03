@@ -19,4 +19,15 @@ body {
   order: 2;
   text-align: center;
   color: white;
+  font-family: Arial, sans-serif;
+}
+
+.product-info h1 {
+  font-size: 28px;
+  margin: 0;
+}
+
+.product-info p {
+  font-size: 20px;
+  margin: 0;
 }
