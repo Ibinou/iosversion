@@ -50,10 +50,8 @@ const showDeviceImage = () => {
     case 'iPhone7,1': // iPhone 6 Plus
       img.src = 'img/iphone-6-plus.jpg';
       break;
-    case 'iPhone7,2': // iPhone 6
-      img.src = 'img/iphone-6.jpg';
+    case 'iPhone13,4': // iPhone 12 Pro Max
+      img.src = 'https://ipsw.me/assets/devices/iPhone13,4.png';
       break;
-    case 'iPhone8,1': // iPhone 6s
-      img.src = 'img/iphone-6s.jpg';
-      break;
-    case 'iPhone8,2': // iPhone 6s Plus
+ 
+      
