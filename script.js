@@ -1,68 +1,59 @@
-const iphoneModels = [
-  {
-    name: 'iPhone 5',
-    image: 'images/iphone-5.png',
-  },
-  {
-    name: 'iPhone 6',
-    image: 'images/iphone-6.png',
-  },
-  {
-    name: 'iPhone 7',
-    image: 'images/iphone-7.png',
-  },
-  {
-    name: 'iPhone 8',
-    image: 'images/iphone-8.png',
-  },
-  {
-    name: 'iPhone X',
-    image: 'images/iphone-x.png',
-  },
-  {
-    name: 'iPhone 11',
-    image: 'images/iphone-11.png',
-  },
-  {
-    name: 'iPhone 12',
-    image: 'images/iphone-12.png',
-  },
+const iosDeviceModels = [
+  'iPhone1,1', 'iPhone1,2', 'iPhone2,1', 'iPhone3,1', 'iPhone3,2', 'iPhone3,3',
+  'iPhone4,1', 'iPhone5,1', 'iPhone5,2', 'iPhone5,3', 'iPhone5,4', 'iPhone6,1',
+  'iPhone6,2', 'iPhone7,1', 'iPhone7,2', 'iPhone8,1', 'iPhone8,2', 'iPhone8,4',
+  'iPhone9,1', 'iPhone9,2', 'iPhone9,3', 'iPhone9,4', 'iPhone10,1', 'iPhone10,2',
+  'iPhone10,3', 'iPhone10,4', 'iPhone10,5', 'iPhone10,6', 'iPhone11,2', 'iPhone11,4',
+  'iPhone11,6', 'iPhone11,8', 'iPhone12,1', 'iPhone12,3', 'iPhone12,5', 'iPhone12,8',
+  'iPhone13,1', 'iPhone13,2', 'iPhone13,3', 'iPhone13,4',
 ];
 
-const container = document.getElementById('container');
-const nameElement = document.getElementById('iphone-name');
-const infoElement = document.getElementById('iphone-info');
-const imageElement = document.getElementById('iphone-image');
+const getiOSDeviceModel = () => {
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  const regex = /\b(iPhone(?: SE)?|iPod(?: touch)?|iPad(?: Pro)?)\b[,/]\s*(\w+)/;
+  const match = regex.exec(userAgent) || [];
+  return `${match[1]} ${match[2]}` || 'unknown';
+}
 
-const iOSversion = () => {
-  if (/iP(hone|od|ad)/.test(navigator.platform)) {
-    const v = navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);
-    return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
-  }
-  return null;
-};
-
-const getIphoneModel = () => {
-  const version = iOSversion();
-  let model = '';
-  if (version) {
-    const { width, height } = window.screen;
-    const screenHeight = Math.max(width, height);
-    switch (screenHeight) {
-      case 480:
-        model = 'iPhone 4/4s';
-        break;
-      case 568:
-        model = 'iPhone 5/SE';
-        break;
-      case 667:
-        if (version[0] === 8) {
-          model = 'iPhone 6';
-        } else if (version[0] === 9) {
-          model = 'iPhone 6s';
-        } else {
-          model = 'iPhone 7/8/SE2';
-        }
-        break;
-      case 736:
-        if (version[0] === 8 || version[0] ===
+const showDeviceImage = () => {
+  const model = getiOSDeviceModel();
+  const img = document.createElement('img');
+  img.className = 'product-image';
+  
+  switch (model) {
+    case 'iPhone1,1': // iPhone
+      img.src = 'img/iphone-1.jpg';
+      break;
+    case 'iPhone2,1': // iPhone 3G
+      img.src = 'img/iphone-3g.jpg';
+      break;
+    case 'iPhone3,1': // iPhone 4
+    case 'iPhone3,2':
+    case 'iPhone3,3':
+      img.src = 'img/iphone-4.jpg';
+      break;
+    case 'iPhone4,1': // iPhone 4S
+      img.src = 'img/iphone-4s.jpg';
+      break;
+    case 'iPhone5,1': // iPhone 5
+    case 'iPhone5,2':
+      img.src = 'img/iphone-5.jpg';
+      break;
+    case 'iPhone5,3': // iPhone 5c
+    case 'iPhone5,4':
+      img.src = 'img/iphone-5c.jpg';
+      break;
+    case 'iPhone6,1': // iPhone 5s
+    case 'iPhone6,2':
+      img.src = 'img/iphone-5s.jpg';
+      break;
+    case 'iPhone7,1': // iPhone 6 Plus
+      img.src = 'img/iphone-6-plus.jpg';
+      break;
+    case 'iPhone7,2': // iPhone 6
+      img.src = 'img/iphone-6.jpg';
+      break;
+    case 'iPhone8,1': // iPhone 6s
+      img.src = 'img/iphone-6s.jpg';
+      break;
+    case 'iPhone8,2': // iPhone 6s Plus
