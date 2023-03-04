@@ -23,15 +23,15 @@ var imageContainer = document.getElementById('image-container');
 var image = document.createElement('img');
 if (deviceType === 'iPhone') {
 	if (iosVersion >= 12) {
-		image.src = 'iphone_xs.png';
+		image.src = 'https://ipsw.me/assets/devices/iPhone8,4.png';
 	} else if (iosVersion >= 11) {
-		image.src = 'iphone_x.png';
+		image.src = 'https://ipsw.me/assets/devices/iPhone8,4.png';
 	} else if (iosVersion >= 10) {
-		image.src = 'iphone_7.png';
+		image.src = 'https://ipsw.me/assets/devices/iPhone8,4.png';
 	} else if (iosVersion >= 9) {
-		image.src = 'iphone_6s.png';
+		image.src = 'https://ipsw.me/assets/devices/iPhone8,4.png';
 	} else {
-		image.src = 'iphone_6.png';
+		image.src = 'https://ipsw.me/assets/devices/iPhone8,4.png';
 	}
 } else if (deviceType === 'iPad') {
 	if (iosVersion >= 12) {
